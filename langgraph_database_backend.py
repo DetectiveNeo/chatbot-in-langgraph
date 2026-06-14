@@ -7,7 +7,7 @@ from langgraph.graph.message import add_messages
 from dotenv import load_dotenv
 import sqlite3
 
-load_dotenv()
+load_dotenv(override=True)
 
 llm = ChatOpenAI()
 
@@ -34,7 +34,29 @@ def retrieve_all_threads():
     all_threads = set()
     for checkpoint in checkpointer.list(None):
         all_threads.add(checkpoint.config['configurable']['thread_id'])
-
+ 
     return list(all_threads)
+
+
+if __name__ == "__main__":
+    # # Example usage
+    # user_message = "What is 2 +3 ?"
+
+    # config1 = {"configurable": {"thread_id": "2"}}
+
+    # response = chatbot.invoke({"messages": [user_message]}, config= config1)
+    # # print(response['messages'][-1].content)
+
+    # print(response['messages'])
+
+    # print(checkpointer.list(None))
+
+    # for checkpoint in checkpointer.list(None):
+    #     print(checkpoint.config['configurable']['thread_id'])
+    #     break
+
+    retrieved_threads = retrieve_all_threads()
+    print(retrieved_threads)
+
 
 
